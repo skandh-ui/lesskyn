@@ -227,7 +227,12 @@ export default function DashboardPage() {
 
           <div className="flex items-center gap-12">
             {/* WhatsApp Icon */}
-            <button className="group transition-transform active:scale-95">
+            <a
+              href="https://wa.me/917977937648"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group transition-transform active:scale-95"
+            >
               <svg
                 width="32"
                 height="32"
@@ -241,7 +246,7 @@ export default function DashboardPage() {
               >
                 <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
               </svg>
-            </button>
+            </a>
 
             {/* Mail Icon */}
             <a

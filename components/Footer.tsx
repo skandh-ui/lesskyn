@@ -1,11 +1,12 @@
 "use client";
 
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logo from "@/public/assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 interface FooterProps {
   variant?: "default" | "landing";
@@ -13,6 +14,12 @@ interface FooterProps {
 
 const Footer = ({ variant = "default" }: FooterProps) => {
   const isLanding = variant === "landing";
+  const [showToast, setShowToast] = useState(false);
+
+  const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
 
   return (
     <section className="relative">
@@ -89,6 +96,15 @@ const Footer = ({ variant = "default" }: FooterProps) => {
               AI-powered skincare assistant creating clarity in skincare chaos
               for Indian consumers.
             </p>
+
+            <a
+              href="mailto:skandh@lesskyn.in"
+              onClick={handleContactClick}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-white/20 bg-transparent text-white hover:bg-white/10 transition-colors"
+            >
+              <Mail className="h-4 w-4" />
+              Contact Us
+            </a>
           </div>
 
           {/* ---------------- QUICK LINKS ---------------- */}
@@ -131,8 +147,15 @@ const Footer = ({ variant = "default" }: FooterProps) => {
               <li>
                 <Link href="/booking">Talk to Skin Bestie</Link>
               </li>
-              <li className="hover:text-white">
-                <a href="mailto:skandh@lesskyn.in">Contact Us</a>
+              <li>
+                <a
+                  href="https://wa.me/917977937648"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
+                  Send a Message
+                </a>
               </li>
             </ul>
           </div>
@@ -171,6 +194,17 @@ const Footer = ({ variant = "default" }: FooterProps) => {
             <Twitter className="h-5 w-5 " />
             <Facebook className="h-5 w-5" />
           </div>
+
+          {/* CONTACT BUTTON */}
+          <a
+            href="mailto:skandh@lesskyn.in"
+            onClick={handleContactClick}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-white/20 bg-transparent text-white hover:bg-white/10 transition-colors w-full max-w-[200px]"
+          >
+            <Mail className="h-4 w-4" />
+            Contact Us
+          </a>
+
           <div className="grid grid-cols-2 gap-x-8 gap-y-8 w-full max-w-[320px] mx-auto">
             {/* QUICK LINKS */}
             <div className="flex flex-col gap-4 items-start">
@@ -204,14 +238,33 @@ const Footer = ({ variant = "default" }: FooterProps) => {
                 <li>
                   <Link href="/booking">Talk to Skin Bestie</Link>
                 </li>
-                <li className="hover:text-white">
-                  <a href="mailto:skandh@lesskyn.in">Contact Us</a>
+                <li>
+                  <a
+                    href="https://wa.me/917977937648"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white"
+                  >
+                    Send a Message
+                  </a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
       </footer>
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-[slideUp_0.3s_ease-out]">
+          <div className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-3">
+            <Mail className="w-5 h-5 text-blue-400" />
+            <span className="font-medium">
+              Please email at: skandh@lesskyn.in
+            </span>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

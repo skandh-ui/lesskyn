@@ -1,6 +1,21 @@
-import { v2 as cloudinary, UploadApiResponse, DeleteApiResponse } from "cloudinary";
+import {
+  v2 as cloudinary,
+  UploadApiResponse,
+  DeleteApiResponse,
+} from "cloudinary";
 import fs from "fs/promises";
 import { existsSync, createReadStream, statSync } from "fs";
+
+// Validate environment variables
+if (!process.env.CLOUDINARY_CLOUD_NAME) {
+  console.error("✗ Missing CLOUDINARY_CLOUD_NAME environment variable");
+}
+if (!process.env.CLOUDINARY_API_KEY) {
+  console.error("✗ Missing CLOUDINARY_API_KEY environment variable");
+}
+if (!process.env.CLOUDINARY_API_SECRET) {
+  console.error("✗ Missing CLOUDINARY_API_SECRET environment variable");
+}
 
 // Configure Cloudinary
 cloudinary.config({
@@ -31,7 +46,7 @@ type ProgressCallback = (progress: number) => void;
  */
 const uploadOnCloudinary = async (
   localFilePath: string,
-  onProgress?: ProgressCallback
+  onProgress?: ProgressCallback,
 ): Promise<CloudinaryUploadResult> => {
   try {
     if (!localFilePath) {
@@ -50,12 +65,12 @@ const uploadOnCloudinary = async (
 
     // Create read stream with progress tracking
     const stream = createReadStream(localFilePath);
-    
+
     // Track upload progress
-    stream.on('data', (chunk: Buffer) => {
+    stream.on("data", (chunk: Buffer) => {
       uploadedSize += chunk.length;
       const progress = Math.round((uploadedSize / totalSize) * 100);
-      
+
       if (onProgress) {
         onProgress(progress);
       }
@@ -71,12 +86,12 @@ const uploadOnCloudinary = async (
           if (error) reject(error);
           else if (result) resolve(result);
           else reject(new Error("Upload failed without error"));
-        }
+        },
       );
 
       stream.pipe(uploadStream);
-      
-      stream.on('error', (error) => {
+
+      stream.on("error", (error) => {
         reject(error);
       });
     });
@@ -100,9 +115,10 @@ const uploadOnCloudinary = async (
       console.error("Failed to delete local file:", unlinkError);
     }
 
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("Error uploading to Cloudinary:", errorMessage);
-    
+
     return { success: false, error: errorMessage };
   }
 };
@@ -115,7 +131,7 @@ const uploadOnCloudinary = async (
  */
 const deleteFromCloudinary = async (
   publicId: string,
-  resourceType: "image" | "video" | "raw" | "auto" = "image"
+  resourceType: "image" | "video" | "raw" | "auto" = "image",
 ): Promise<CloudinaryDeleteResult> => {
   try {
     if (!publicId) {
@@ -130,18 +146,23 @@ const deleteFromCloudinary = async (
     if (response.result === "ok") {
       return { success: true, data: response };
     } else {
-      return { 
-        success: false, 
-        error: `Deletion failed: ${response.result}` 
+      return {
+        success: false,
+        error: `Deletion failed: ${response.result}`,
       };
     }
   } catch (error) {
-    const errorMessage = error instanceof Error ? error.message : "Unknown error";
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error";
     console.error("Error deleting from Cloudinary:", errorMessage);
-    
+
     return { success: false, error: errorMessage };
   }
 };
 
 export { uploadOnCloudinary, deleteFromCloudinary };
-export type { CloudinaryUploadResult, CloudinaryDeleteResult, ProgressCallback };
+export type {
+  CloudinaryUploadResult,
+  CloudinaryDeleteResult,
+  ProgressCallback,
+};

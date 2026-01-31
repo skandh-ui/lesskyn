@@ -44,37 +44,49 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Create temporary file path
-    const tempFilePath = join(tmpdir(), `upload_${Date.now()}_${file.name}`);
+    // Create temporary file path with sanitized filename
+    const sanitizedFilename = file.name.replace(/[^a-zA-Z0-9.-]/g, "_");
+    const tempFilePath = join(
+      tmpdir(),
+      `upload_${Date.now()}_${sanitizedFilename}`,
+    );
 
-    // Write buffer to temporary file
-    await writeFile(tempFilePath, buffer);
+    let uploadSuccessful = false;
 
-    // Upload to Cloudinary
-    const result = await uploadOnCloudinary(tempFilePath);
+    try {
+      // Write buffer to temporary file
+      await writeFile(tempFilePath, buffer);
+      console.log(`✓ Temporary file created: ${tempFilePath}`);
 
-    if (!result.success || !result.data) {
-      // Clean up temp file if upload failed
-      try {
-        await unlink(tempFilePath);
-      } catch (e) {
-        // Ignore cleanup errors
+      // Upload to Cloudinary
+      const result = await uploadOnCloudinary(tempFilePath);
+
+      if (!result.success || !result.data) {
+        return NextResponse.json(
+          { error: result.error || "Failed to upload image" },
+          { status: 500 },
+        );
       }
 
-      return NextResponse.json(
-        { error: result.error || "Failed to upload image" },
-        { status: 500 },
-      );
-    }
+      uploadSuccessful = true;
 
-    return NextResponse.json(
-      {
-        success: true,
-        url: result.data.secure_url,
-        publicId: result.data.public_id,
-      },
-      { status: 200 },
-    );
+      return NextResponse.json(
+        {
+          success: true,
+          url: result.data.secure_url,
+          publicId: result.data.public_id,
+        },
+        { status: 200 },
+      );
+    } finally {
+      // Always clean up temp file
+      try {
+        await unlink(tempFilePath);
+        console.log(`✓ Temporary file cleaned up: ${tempFilePath}`);
+      } catch (cleanupError) {
+        console.error("Warning: Failed to cleanup temp file:", cleanupError);
+      }
+    }
   } catch (error: any) {
     console.error("Upload error:", error);
     return NextResponse.json(
