@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 // Component Imports
 import StatsGroup from "@/components/StatsGroup";
 import MCQStack from "@/components/MCQStack";
@@ -344,9 +345,11 @@ const Page = () => {
                   </div>
                 </div>
                 <div className="pt-2 flex justify-center md:justify-start">
-                  <button className="px-6 sm:px-8 py-3 rounded-xl bg-[#FFAD71] text-black font-bold text-base sm:text-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
-                    Take the Quiz <span className="text-xl">📝</span>
-                  </button>
+                  <Link href="/quiz">
+                    <button className="px-6 sm:px-8 py-3 rounded-xl bg-[#FFAD71] text-black font-bold text-base sm:text-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+                      Take the Quiz <span className="text-xl">📝</span>
+                    </button>
+                  </Link>
                 </div>
               </div>
               {/* Stack Right */}
@@ -403,9 +406,12 @@ const Page = () => {
                   </div>
                 </div>
                 <div className="flex justify-center md:justify-end pt-2">
-                  <button className="px-4 sm:px-6 py-3 rounded-xl cursor-pointer bg-[#98E6D0] border border-[#42C0A1] text-black font-bold text-base sm:text-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
-                    <span className="text-xl">📅</span> Book Video Consultation
-                  </button>
+                  <Link href="/dermat">
+                    <button className="px-4 sm:px-6 py-3 rounded-xl cursor-pointer bg-[#98E6D0] border border-[#42C0A1] text-black font-bold text-base sm:text-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+                      <span className="text-xl">📅</span> Book Video
+                      Consultation
+                    </button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -444,9 +450,11 @@ const Page = () => {
                   </p>
                 </div>
                 <div className="pt-2 flex justify-center md:justify-start px-2 md:px-0">
-                  <button className="px-6 sm:px-8 py-3 cursor-pointer rounded-xl bg-[#D489B3] text-white font-bold text-base sm:text-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
-                    Talk To Them Now <span className="text-xl">📹</span>
-                  </button>
+                  <Link href="/booking">
+                    <button className="px-6 sm:px-8 py-3 cursor-pointer rounded-xl bg-[#D489B3] text-white font-bold text-base sm:text-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+                      Talk To Them Now <span className="text-xl">📹</span>
+                    </button>
+                  </Link>
                 </div>
               </div>
               {/* Stack Right */}

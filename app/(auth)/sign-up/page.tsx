@@ -26,6 +26,7 @@ const SignInPage = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -229,12 +230,16 @@ const SignInPage = () => {
                 />
                 <span className="text-gray-600 text-base">Remember Me</span>
               </label>
-              <Link
-                href="/forgot-password"
+              <button
+                type="button"
+                onClick={() => {
+                  setShowToast(true);
+                  setTimeout(() => setShowToast(false), 3000);
+                }}
                 className="text-[#A855F7] hover:text-purple-700 font-semibold text-base"
               >
                 Forgot Password?
-              </Link>
+              </button>
             </div>
 
             {/* Terms and Conditions Checkbox */}
@@ -318,6 +323,18 @@ const SignInPage = () => {
           </p>
         </div>
       </div>
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
+          <div className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-3">
+            <Mail className="w-5 h-5 text-blue-400" />
+            <span className="font-medium">
+              Please email at: skandh@lesskyn.in
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

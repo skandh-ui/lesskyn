@@ -3,7 +3,7 @@ import Image from "next/image";
 import logo from "@/public/assets/logo.png";
 import { useState, useEffect, useRef } from "react"; // Added useEffect and useRef
 import { useRouter, usePathname } from "next/navigation";
-import profile from "@/public/assets/profile.svg";
+import { UserCircle2 } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { logout } from "@/lib/actions/auth";
@@ -121,7 +121,9 @@ const Header = () => {
           <Link
             href="/about-us"
             className={
-              pathname === "/about-us" ? "text-black font-bold" : "text-black/50"
+              pathname === "/about-us"
+                ? "text-black font-bold"
+                : "text-black/50"
             }
           >
             About
@@ -158,13 +160,9 @@ const Header = () => {
             <div className="relative" ref={profileRef}>
               <div
                 onClick={() => setProfileDropdown(!profileDropdown)}
-                className="flex items-center gap-2 cursor-pointer shrink-0"
+                className="flex items-center gap-2 cursor-pointer shrink-0 hover:opacity-70 transition-opacity"
               >
-                <Image
-                  src={profile}
-                  alt="Profile"
-                  className="w-8 h-8 sm:w-10 sm:h-12 object-contain"
-                />
+                <UserCircle2 className="w-9 h-9 text-black" strokeWidth={1.5} />
               </div>
 
               {/* Profile Dropdown */}
@@ -232,10 +230,9 @@ const Header = () => {
                     onClick={() => setOpen(false)}
                     className="flex items-center gap-2"
                   >
-                    <Image
-                      src={profile}
-                      alt="Profile"
-                      className="w-6 h-6 object-contain"
+                    <UserCircle2
+                      className="w-7 h-7 text-black"
+                      strokeWidth={1.5}
                     />
                     <span>Profile</span>
                   </Link>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Facebook, Instagram, Twitter, Mail } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import logo from "@/public/assets/logo.png";
@@ -79,9 +79,30 @@ const Footer = ({ variant = "default" }: FooterProps) => {
               </div>
 
               <div className="flex items-center gap-6 sm:mt-6">
-                <Instagram className="h-6 w-6" />
-                <Twitter className="h-6 w-6" />
-                <Facebook className="h-6 w-6" />
+                <a
+                  href="https://www.instagram.com/lesskyn.in?igsh=MW9vM3hpdjg1aW42Mg=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity"
+                >
+                  <Instagram className="h-6 w-6" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/lesskyn/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity"
+                >
+                  <Linkedin className="h-6 w-6" />
+                </a>
+                <a
+                  href="https://www.facebook.com/share/17zsDi5MUy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity"
+                >
+                  <Facebook className="h-6 w-6" />
+                </a>
               </div>
             </div>
 
@@ -190,9 +211,30 @@ const Footer = ({ variant = "default" }: FooterProps) => {
 
           {/* SOCIALS */}
           <div className="flex items-center gap-6">
-            <Instagram className="h-5 w-5" />
-            <Twitter className="h-5 w-5 " />
-            <Facebook className="h-5 w-5" />
+            <a
+              href="https://www.instagram.com/lesskyn.in?igsh=MW9vM3hpdjg1aW42Mg=="
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/lesskyn/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href="https://www.facebook.com/share/17zsDi5MUy/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity"
+            >
+              <Facebook className="h-5 w-5" />
+            </a>
           </div>
 
           {/* CONTACT BUTTON */}
@@ -205,6 +247,7 @@ const Footer = ({ variant = "default" }: FooterProps) => {
             Contact Us
           </a>
 
+          {/* LINKS GRID */}
           <div className="grid grid-cols-2 gap-x-8 gap-y-8 w-full max-w-[320px] mx-auto">
             {/* QUICK LINKS */}
             <div className="flex flex-col gap-4 items-start">
@@ -256,7 +299,7 @@ const Footer = ({ variant = "default" }: FooterProps) => {
 
       {/* Toast Notification */}
       {showToast && (
-        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-[slideUp_0.3s_ease-out]">
+        <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50 animate-in fade-in slide-in-from-bottom-4 duration-300">
           <div className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-3">
             <Mail className="w-5 h-5 text-blue-400" />
             <span className="font-medium">
