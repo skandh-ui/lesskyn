@@ -58,13 +58,29 @@ export async function POST(req: Request) {
         try {
           const populatedBooking = await Booking.findById(booking._id)
             .populate("expert", "name email")
-            .populate("user", "email")
+            .populate("user", "email skinDetails")
             .lean();
 
           if (populatedBooking) {
+            // Build description with skin details
+            let description = `Skin consultation session\nDuration: ${booking.duration} minutes\nAmount: ₹${booking.price}`;
+
+            if (populatedBooking.user.skinDetails) {
+              const { skinType, commitment, preference, concerns } =
+                populatedBooking.user.skinDetails;
+              description += `\n\n--- Patient Skin Details ---`;
+              if (skinType) description += `\nSkin Type: ${skinType}`;
+              if (commitment)
+                description += `\nCommitment Level: ${commitment}`;
+              if (preference) description += `\nPreference: ${preference}`;
+              if (concerns && concerns.length > 0) {
+                description += `\nConcerns: ${concerns.join(", ")}`;
+              }
+            }
+
             const { meetLink } = await createGoogleMeetEvent({
               title: `Consultation with ${populatedBooking.expert.name}`,
-              description: `Skin consultation session\nDuration: ${booking.duration} minutes\nAmount: ₹${booking.price}`,
+              description,
               startTimeUTC: booking.startTime,
               endTimeUTC: booking.endTime,
               attendees: [

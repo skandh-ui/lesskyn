@@ -140,7 +140,7 @@ const Page = () => {
     <main className="min-h-screen w-full font-sans overflow-x-hidden">
       {/* ================= HERO SECTION WRAPPER ================= */}
       {/* Gradient applied here specifically so it fades from Purple to White properly */}
-      <div className="relative w-full bg-gradient-to-b from-[#A666F8] via-[#CFABF5] to-white pb-20 overflow-x-hidden">
+      <div className="relative w-full bg-gradient-to-b from-[#A666F8] via-[#CFABF5] to-white pb-2 md:pb-20 overflow-x-hidden">
         {/* Keeping your provided Hero Section Code EXACTLY as is */}
         <div className="relative max-w-[1440px] mx-auto min-h-[90vh] flex flex-col items-center justify-center pt-20 pb-10 px-4">
           {/* ================= FLOATING SVGs (SCALED UP) ================= */}
@@ -250,7 +250,7 @@ const Page = () => {
           </div>
 
           {/* ================= CENTERED TEXT CONTENT ================= */}
-          <div className="relative z-10 text-center max-w-3xl px-6 mt-8 md:mt-16 mb-8 md:mb-24">
+          <div className="relative z-10 text-center max-w-3xl px-6 mt-8 md:mt-16 mb-0 md:mb-24">
             <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold text-black mb-5 md:mb-6 leading-tight animate-appear delay-300">
               Skincare, built for
               <br />
@@ -272,12 +272,12 @@ const Page = () => {
       </div>
 
       {/* ================= NEW SECTION: START BUILDING YOUR ROUTINE ================= */}
-      <div className="w-full bg-white py-12 px-4 relative z-20 pb-24 overflow-x-hidden">
+      <div className="w-full bg-white pt-4 pb-12 md:py-12 md:pb-24 px-4 relative z-20 overflow-x-hidden">
         {/* FIX: Changed max-w-7xl to max-w-[1200px] to perfectly align with the StatsGroup above */}
         <div className="max-w-[1200px] mx-auto">
           {/* HEADER & NAV PILLS */}
-          <div className="text-center mb-10 px-2 sm:px-4">
-            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black mb-6 md:mb-8 px-2">
+          <div className="text-center mb-2 md:mb-10 px-2 sm:px-4">
+            <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-black mb-3 md:mb-8 px-2">
               Start Building Your Skincare Routine
             </h2>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 lg:gap-6 max-w-4xl mx-auto">

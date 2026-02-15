@@ -221,6 +221,9 @@ const Header = () => {
                 <Link href="/quiz" onClick={() => setOpen(false)}>
                   Quiz
                 </Link>
+                <Link href="/dermat" onClick={() => setOpen(false)}>
+                  Dermats
+                </Link>
                 <Link href="/booking" onClick={() => setOpen(false)}>
                   Skin Besties
                 </Link>
