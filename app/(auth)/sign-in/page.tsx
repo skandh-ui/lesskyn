@@ -27,6 +27,7 @@ const SignInPage = () => {
   const [showToast, setShowToast] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const redirectUrl = searchParams.get("redirect") || "/dashboard";
 
   useEffect(() => {
     const errorParam = searchParams.get("error");
@@ -103,7 +104,7 @@ const SignInPage = () => {
             <button
               onClick={async () => {
                 try {
-                  await signIn("google", { callbackUrl: "/dashboard" });
+                  await signIn("google", { callbackUrl: redirectUrl });
                 } catch (error) {
                   console.error("Google sign in error:", error);
                   setError("Failed to sign in with Google");
@@ -243,7 +244,7 @@ const SignInPage = () => {
                   });
 
                   if (result.success) {
-                    router.push("/dashboard");
+                    router.push(redirectUrl);
                   } else {
                     setError(result.error || "Failed to sign in");
                   }

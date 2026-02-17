@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import DermatCard from "@/components/DermatCard";
 import BookingForm, { BookingFormData } from "@/components/BookingForm";
 import SlotSelector from "@/components/SlotSelector";
@@ -31,6 +32,7 @@ interface PageProps {
 
 const Page = ({ params }: PageProps) => {
   const router = useRouter();
+  const { data: session, status } = useSession();
   const [expertId, setExpertId] = useState<string>("");
   const [expert, setExpert] = useState<Expert | null>(null);
   const [loading, setLoading] = useState(true);
@@ -40,6 +42,8 @@ const Page = ({ params }: PageProps) => {
   const [bookingId, setBookingId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [slotRefreshTrigger, setSlotRefreshTrigger] = useState(0);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   // Resolve params and set expertId
   useEffect(() => {
@@ -78,6 +82,19 @@ const Page = ({ params }: PageProps) => {
   }, [expertId]);
 
   const handleFormSubmit = async (formData: BookingFormData) => {
+    // Check if user is logged in
+    if (status === "unauthenticated" || !session) {
+      setToastMessage("Please sign in to continue with booking");
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+
+      // Redirect to sign-in after showing toast
+      setTimeout(() => {
+        router.push("/sign-in?redirect=/dermat/" + expertId);
+      }, 1500);
+      return;
+    }
+
     try {
       setIsProcessing(true);
       setBookingData(formData);
@@ -106,11 +123,15 @@ const Page = ({ params }: PageProps) => {
       console.log("Booking initiated:", data);
     } catch (error) {
       console.error("Error initiating booking:", error);
-      alert(
+      const errorMessage =
         error instanceof Error
           ? error.message
-          : "Failed to create booking. Please try again.",
-      );
+          : "Failed to create booking. Please try again.";
+
+      // Show toast for errors instead of alert
+      setToastMessage(errorMessage);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
     } finally {
       setIsProcessing(false);
     }
@@ -349,6 +370,28 @@ const Page = ({ params }: PageProps) => {
           )}
         </div>
       </div>
+
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 animate-[slideUp_0.3s_ease-out]">
+          <div className="bg-gray-900 text-white px-6 py-3 rounded-lg shadow-xl flex items-center gap-3">
+            <svg
+              className="w-5 h-5 text-red-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+              />
+            </svg>
+            <span className="font-medium">{toastMessage}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
