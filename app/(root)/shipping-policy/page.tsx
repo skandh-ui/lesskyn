@@ -9,7 +9,7 @@ const ShippingPolicy = () => {
                 <div className="space-y-10">
                     <section>
                         <p className="mb-6 font-medium text-gray-700">
-                            **SKYN CONSUMERS PRIVATE LIMITED ("Company")** provides recommendations and links for skincare products via **lesskyn.in**. Please note the following regarding the shipment and delivery of goods:
+                            <span className="font-bold">SKYN CONSUMERS PRIVATE LIMITED ("Company")</span> provides recommendations and links for skincare products via <span className="font-bold">lesskyn.in</span>. Please note the following regarding the shipment and delivery of goods:
                         </p>
                     </section>
 
@@ -65,8 +65,8 @@ const ShippingPolicy = () => {
                         <div className="bg-purple-50 p-6 rounded-2xl border border-purple-100">
                             <p className="mb-4 font-medium italic">For digital services, such as consultations with Dermatologists or Skincare Besties:</p>
                             <ul className="list-disc pl-6 space-y-3">
-                                <li>**Method**: There is no physical shipping involved. Access to the consultation (video link/call) will be delivered electronically via email or your registered contact method.</li>
-                                <li>**Timeline**: Access is provided at the scheduled time chosen during the booking process.</li>
+                                <li><span className="font-bold">Method</span>: There is no physical shipping involved. Access to the consultation (video link/call) will be delivered electronically via email or your registered contact method.</li>
+                                <li><span className="font-bold">Timeline</span>: Access is provided at the scheduled time chosen during the booking process.</li>
                             </ul>
                         </div>
                     </section>

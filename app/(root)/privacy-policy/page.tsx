@@ -10,7 +10,7 @@ const PrivacyPolicy = () => {
                     {/* --- Introductory Paragraphs --- */}
                     <section className="space-y-4">
                         <p>
-                            This Privacy Policy describes how **SKYN CONSUMERS PRIVATE LIMITED** and its affiliates (collectively "SKYN CONSUMERS PRIVATE LIMITED, we, our, us") collect, use, share, protect or otherwise process your information/ personal data through our website <a href="https://www.lesskyn.in/" className="text-blue-600 underline">https://www.lesskyn.in/</a> (hereinafter referred to as Platform). Please note that you may be able to browse certain sections of the Platform without registering with us. We do not offer any product/service under this Platform outside India and your personal data will primarily be stored and processed in India. By visiting this Platform, providing your information or availing any product/service offered on the Platform, you expressly agree to be bound by the terms and conditions of this Privacy Policy, the Terms of Use and the applicable service/product terms and conditions, and agree to be governed by the laws of India including but not limited to the laws applicable to data protection and privacy. If you do not agree please do not use or access our Platform.
+                            This Privacy Policy describes how <span className="font-bold">SKYN CONSUMERS PRIVATE LIMITED</span> and its affiliates (collectively "SKYN CONSUMERS PRIVATE LIMITED, we, our, us") collect, use, share, protect or otherwise process your information/ personal data through our website <a href="https://www.lesskyn.in/" className="text-blue-600 underline">https://www.lesskyn.in/</a> (hereinafter referred to as Platform). Please note that you may be able to browse certain sections of the Platform without registering with us. We do not offer any product/service under this Platform outside India and your personal data will primarily be stored and processed in India. By visiting this Platform, providing your information or availing any product/service offered on the Platform, you expressly agree to be bound by the terms and conditions of this Privacy Policy, the Terms of Use and the applicable service/product terms and conditions, and agree to be governed by the laws of India including but not limited to the laws applicable to data protection and privacy. If you do not agree please do not use or access our Platform.
                         </p>
                     </section>
 
@@ -45,7 +45,7 @@ const PrivacyPolicy = () => {
                             </li>
                             <li>
                                 <p className="font-bold mb-1 underline text-purple-700">3. Specific Sharing for Consultations (Dermatologists & Skincare Besties):</p>
-                                <p>In accordance with the Digital Personal Data Protection Act, 2023, by requesting a consultation, you provide **explicit consent** for the Platform to share your sensitive personal data—specifically skin type, skin concerns, and uploaded photos or videos—with the assigned Dermatologist or "Skincare Bestie."</p>
+                                <p>In accordance with the Digital Personal Data Protection Act, 2023, by requesting a consultation, you provide <span className="font-bold">explicit consent</span> for the Platform to share your sensitive personal data—specifically skin type, skin concerns, and uploaded photos or videos—with the assigned Dermatologist or "Skincare Bestie."</p>
                                 <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="bg-purple-50 p-4 rounded-xl border border-purple-100">
                                         <p className="font-bold text-purple-800 text-sm italic">Purpose Limitation:</p>
@@ -85,7 +85,7 @@ const PrivacyPolicy = () => {
                         <div className="space-y-4">
                             <div>
                                 <p className="font-bold mb-1 underline underline-offset-4">1. Right to Deletion & Account Closure:</p>
-                                <p>As a user of Lesskyn, you have the right to request the deletion of your account and all associated personal data from our records. To initiate this process, you must send a formal request from your registered email address to **skandh@lesskyn.in**.</p>
+                                <p>As a user of Lesskyn, you have the right to request the deletion of your account and all associated personal data from our records. To initiate this process, you must send a formal request from your registered email address to <span className="font-bold">skandh@lesskyn.in</span>.</p>
                             </div>
                             <div>
                                 <p className="font-bold mb-1 underline underline-offset-4">2. Scope of Deletion:</p>
@@ -114,7 +114,7 @@ const PrivacyPolicy = () => {
                             By visiting our Platform or by providing your information, you consent to the collection, use, storage, disclosure and otherwise processing of your information on the Platform in accordance with this Privacy Policy.
                         </p>
                         <p>
-                            You have an option to withdraw your consent that you have already provided by writing to the Grievance Officer at the contact information provided below. Please mention **"Withdrawal of consent for processing personal data"** in your subject line.
+                            You have an option to withdraw your consent that you have already provided by writing to the Grievance Officer at the contact information provided below. Please mention <span className="font-bold">"Withdrawal of consent for processing personal data"</span> in your subject line.
                         </p>
                         <p className="text-sm italic text-white/70">
                             However, please note that your withdrawal of consent will not be retrospective and will be in accordance with the Terms of Use, this Privacy Policy, and applicable laws.

@@ -9,7 +9,7 @@ const RefundPolicy = () => {
                 <div className="space-y-10">
                     <section>
                         <p className="mb-6 font-medium text-gray-700">
-                            This policy governs the cancellation and refund process for products and services facilitated through the **LesSkyn Platform**.
+                            This policy governs the cancellation and refund process for products and services facilitated through the <span className="font-bold">LesSkyn Platform</span>.
                         </p>
                     </section>
 
@@ -18,11 +18,11 @@ const RefundPolicy = () => {
                         <h2 className="text-xl font-bold text-black border-l-4 border-orange-400 pl-4 uppercase tracking-wide">1. Third-Party Product Purchases (e.g., Amazon)</h2>
                         <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 space-y-4">
                             <p>
-                                The Platform provides links to third-party marketplaces, including but not limited to **Amazon.in**.
+                                The Platform provides links to third-party marketplaces, including but not limited to <span className="font-bold">Amazon.in</span>.
                             </p>
                             <ul className="list-disc pl-6 space-y-2">
-                                <li>**Applicability**: All cancellations, returns, and refunds for physical products are governed exclusively by the policies of the respective third-party marketplace (e.g., Amazon's Conditions of Use).</li>
-                                <li>**No Platform Liability**: The Company does not handle, process, or guarantee refunds for products sold on third-party platforms. Any disputes regarding product quality, delivery, or returns must be directed to the third-party seller or marketplace.</li>
+                                <li><span className="font-bold">Applicability</span>: All cancellations, returns, and refunds for physical products are governed exclusively by the policies of the respective third-party marketplace (e.g., Amazon's Conditions of Use).</li>
+                                <li><span className="font-bold">No Platform Liability</span>: The Company does not handle, process, or guarantee refunds for products sold on third-party platforms. Any disputes regarding product quality, delivery, or returns must be directed to the third-party seller or marketplace.</li>
                             </ul>
                         </div>
                     </section>
@@ -37,7 +37,7 @@ const RefundPolicy = () => {
                             <li>
                                 <p className="font-bold underline underline-offset-4">User-Initiated Cancellation:</p>
                                 <ul className="list-disc pl-6 mt-2">
-                                    <li>To be eligible for a refund, you must notify us at **skandh@lesskyn.in** at least **72 hours** prior to the scheduled consultation time.</li>
+                                    <li>To be eligible for a refund, you must notify us at <span className="font-bold">skandh@lesskyn.in</span> at least <span className="font-bold">72 hours</span> prior to the scheduled consultation time.</li>
                                 </ul>
                             </li>
                             <li>
@@ -49,14 +49,14 @@ const RefundPolicy = () => {
                             <li>
                                 <p className="font-bold underline underline-offset-4">Rescheduling:</p>
                                 <ul className="list-disc pl-6 mt-2">
-                                    <li>Rescheduling requests must be submitted via email at least **24 hours** prior to the session.</li>
+                                    <li>Rescheduling requests must be submitted via email at least <span className="font-bold">24 hours</span> prior to the session.</li>
                                     <li>While the Company will act as an intermediary to facilitate the change, rescheduling is subject to the Expert’s availability and is not guaranteed.</li>
                                 </ul>
                             </li>
                             <li>
                                 <p className="font-bold underline underline-offset-4 text-gray-900 border-b-2 border-red-200 inline-block">No-Show Policy:</p>
-                                <p className="mt-2">
-                                    If a user fails to attend a scheduled consultation ("No-Show") without providing the required 72-hour notice, **no refund shall be issued**. Any subsequent rescheduling will be at the sole discretion and "will" of the Expert, and the Company provides no guarantee for a makeup session.
+                                <p className="mt-2 text-red-700 font-medium italic">
+                                    If a user fails to attend a scheduled consultation ("No-Show") without providing the required 72-hour notice, <span className="font-bold">no refund shall be issued</span>. Any subsequent rescheduling will be at the sole discretion and "will" of the Expert, and the Company provides no guarantee for a makeup session.
                                 </p>
                             </li>
                         </ul>
@@ -93,7 +93,7 @@ const RefundPolicy = () => {
                     <section className="space-y-4">
                         <h2 className="text-xl font-bold text-black border-l-4 border-pink-400 pl-4 uppercase tracking-wide">5. Refund Processing Time</h2>
                         <p>
-                            Once a refund is approved by the Company in writing, it will take approximately **5 to 7 business days** for the amount to be credited back to the original payment source, subject to bank processing times.
+                            Once a refund is approved by the Company in writing, it will take approximately <span className="font-bold">5 to 7 business days</span> for the amount to be credited back to the original payment source, subject to bank processing times.
                         </p>
                     </section>
                 </div>

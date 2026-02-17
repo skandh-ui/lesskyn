@@ -10,7 +10,7 @@ const ReturnPolicy = () => {
                 <div className="space-y-10">
                     <section>
                         <p className="mb-6 font-medium text-gray-700">
-                            **SKYN CONSUMERS PRIVATE LIMITED ("Company")** operates **lesskyn.in** as an aggregator platform. Our return policy is structured as follows:
+                            <span className="font-bold">SKYN CONSUMERS PRIVATE LIMITED ("Company")</span> operates <span className="font-bold">lesskyn.in</span> as an aggregator platform. Our return policy is structured as follows:
                         </p>
                     </section>
 
@@ -19,14 +19,14 @@ const ReturnPolicy = () => {
                         <h2 className="text-xl font-bold text-black border-l-4 border-orange-400 pl-4 uppercase tracking-wide">1. Physical Products (Third-Party Marketplaces)</h2>
                         <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100 space-y-4">
                             <p>
-                                All physical products recommended on the Platform are sold and fulfilled by third-party merchants, primarily **Amazon.in**.
+                                All physical products recommended on the Platform are sold and fulfilled by third-party merchants, primarily <span className="font-bold">Amazon.in</span>.
                             </p>
                             <ul className="list-disc pl-6 space-y-2">
-                                <li>**No Direct Returns**: The Company does not stock inventory or ship products. We cannot accept returns, replacements, or exchanges for any physical goods.</li>
-                                <li>**Governing Policies**: Any return or refund request must be initiated through the platform where the purchase was completed (e.g., Amazon). These are governed strictly by that merchant’s specific return window and conditions.</li>
+                                <li><span className="font-bold">No Direct Returns</span>: The Company does not stock inventory or ship products. We cannot accept returns, replacements, or exchanges for any physical goods.</li>
+                                <li><span className="font-bold">Governing Policies</span>: Any return or refund request must be initiated through the platform where the purchase was completed (e.g., Amazon). These are governed strictly by that merchant’s specific return window and conditions.</li>
                             </ul>
                             <div className="p-4 bg-white/50 rounded-xl italic text-sm text-gray-600 border border-orange-200">
-                                **Disclaimer**: We advise users to conduct independent research before purchasing. The Company is not liable for product defects or shipping issues caused by third-party sellers.
+                                <span className="font-bold">Disclaimer</span>: We advise users to conduct independent research before purchasing. The Company is not liable for product defects or shipping issues caused by third-party sellers.
                             </div>
                         </div>
                     </section>
@@ -36,7 +36,7 @@ const ReturnPolicy = () => {
                         <h2 className="text-xl font-bold text-black border-l-4 border-blue-400 pl-4 uppercase tracking-wide">2. Consultation Services (Dermatologists & Skincare Besties)</h2>
                         <div className="space-y-4">
                             <p>
-                                In accordance with the **Indian Contract Act, 1872**, once a consultation session has been attended, the service is deemed **"consumed"** and cannot be returned.
+                                In accordance with the <span className="font-bold">Indian Contract Act, 1872</span>, once a consultation session has been attended, the service is deemed <span className="font-bold">"consumed"</span> and cannot be returned.
                             </p>
                             <ul className="space-y-4">
                                 <li>
@@ -59,7 +59,7 @@ const ReturnPolicy = () => {
                             <ul className="list-disc pl-6 space-y-2">
                                 <li>Used or opened skincare products purchased via third-party links.</li>
                                 <li>Service fees for consultations that have already been completed.</li>
-                                <li>Requests made after the 72-hour cancellation window (refer to **Refund Policy**).</li>
+                                <li>Requests made after the 72-hour cancellation window (refer to <span className="font-bold">Refund Policy</span>).</li>
                             </ul>
                         </div>
                     </section>
