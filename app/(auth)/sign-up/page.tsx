@@ -253,12 +253,12 @@ const SignInPage = () => {
                   className="w-5 h-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500 accent-black"
                 />
                 <span className="text-gray-600 text-base">
-                  I have read all{" "}
+                  I have Read all{" "}
                   <Link
-                    href="/"
+                    href="/terms-and-conditions"
                     className="text-[#A855F7] hover:text-purple-700 font-semibold hover:underline"
                   >
-                    terms and conditions
+                    Terms & Conditions
                   </Link>
                   *
                 </span>

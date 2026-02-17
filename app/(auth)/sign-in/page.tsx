@@ -22,6 +22,7 @@ const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
@@ -57,15 +58,11 @@ const SignInPage = () => {
           </div>
 
           {/* Teal Blob - Bottom Left */}
-          {/* Updated shadow: Harder edge (2px blur), significant offset towards top-right */}
           <div className="absolute left-20 lg:left-28 -bottom-12 w-12 lg:w-20 hidden lg:block opacity-90 drop-shadow-[8px_-8px_2px_rgba(0,0,0,0.25)]">
             <Image src={tealBlob} alt="" className="w-full h-auto" />
           </div>
 
           {/* 2. RIGHT SIDE ELEMENTS */}
-
-          {/* Yellow Rect Blob - Middle Right (Now at top right position) */}
-          {/* Updated shadow: Harder edge (2px blur), significant offset towards bottom-left */}
           <div className="absolute right-4 lg:-right-10 -top-8 w-12 lg:w-14 rotate-[15deg] hidden lg:block opacity-90 drop-shadow-[-8px_8px_2px_rgba(0,0,0,0.25)]">
             <Image src={yellowRectBlob} alt="" className="w-full h-auto" />
           </div>
@@ -151,7 +148,7 @@ const SignInPage = () => {
       {/* ================= BOTTOM SECTION (Form Inputs) ================= */}
       <div className="w-full bg-white pb-20">
         <div className="w-full max-w-md mx-auto px-4 flex flex-col items-center">
-          <form className="w-full flex flex-col gap-6 text-left">
+          <form className="w-full flex flex-col gap-6 text-left" onSubmit={(e) => e.preventDefault()}>
             {/* Email Input */}
             <div>
               <label
@@ -221,6 +218,28 @@ const SignInPage = () => {
               </button>
             </div>
 
+            {/* Terms and Conditions Checkbox */}
+            <div className="mt-1">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                  className="w-5 h-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500 accent-black"
+                />
+                <span className="text-gray-600 text-base">
+                  I have Read all{" "}
+                  <Link
+                    href="/terms-and-conditions"
+                    className="text-[#A855F7] hover:text-purple-700 font-semibold"
+                  >
+                    Terms & Conditions
+                  </Link>
+                  *
+                </span>
+              </label>
+            </div>
+
             {/* Error Message */}
             {error && (
               <div className="w-full bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
@@ -231,10 +250,16 @@ const SignInPage = () => {
             {/* Continue Button */}
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={isLoading || !termsAccepted}
               onClick={async (e) => {
                 e.preventDefault();
                 setError("");
+
+                if (!termsAccepted) {
+                  setError("Please accept the terms and conditions");
+                  return;
+                }
+
                 setIsLoading(true);
 
                 try {
@@ -265,7 +290,7 @@ const SignInPage = () => {
             Don&apos;t have an account?{" "}
             <Link
               href="/sign-up"
-              className="text-[#A855F7] font-semibold hover:underline"
+              className="text-[#A855F7] font-semibold hover:text-purple-700"
             >
               Signup
             </Link>

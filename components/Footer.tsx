@@ -7,6 +7,7 @@ import logo from "@/public/assets/logo.png";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 interface FooterProps {
   variant?: "default" | "landing";
@@ -15,6 +16,9 @@ interface FooterProps {
 const Footer = ({ variant = "default" }: FooterProps) => {
   const isLanding = variant === "landing";
   const [showToast, setShowToast] = useState(false);
+  const { data: session } = useSession();
+
+  const accountHref = session ? "/dashboard" : "/sign-in";
 
   const handleContactClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     setShowToast(true);
@@ -132,9 +136,8 @@ const Footer = ({ variant = "default" }: FooterProps) => {
           <div className="space-y-6">
             <h4 className="font-garamond text-2xl">Quick Links</h4>
             <ul
-              className={`${
-                isLanding ? "text-lg" : "text-sm"
-              } space-y-4 text-white/60`}
+              className={`${isLanding ? "text-lg" : "text-sm"
+                } space-y-4 text-white/60`}
             >
               <li>
                 <Link href="/">Home</Link>
@@ -143,10 +146,10 @@ const Footer = ({ variant = "default" }: FooterProps) => {
                 <Link href="/about-us">About Us</Link>
               </li>
               <li>
-                <Link href="/features">Features</Link>
+                <Link href={accountHref}>Account</Link>
               </li>
               <li>
-                <Link href="/community">Community</Link>
+                <Link href="/terms-and-conditions">Terms & Conditions</Link>
               </li>
             </ul>
           </div>
@@ -155,9 +158,8 @@ const Footer = ({ variant = "default" }: FooterProps) => {
           <div className="space-y-6">
             <h4 className="font-garamond text-2xl">Resources</h4>
             <ul
-              className={`${
-                isLanding ? "text-lg" : "text-sm"
-              } space-y-4 text-white/60`}
+              className={`${isLanding ? "text-lg" : "text-sm"
+                } space-y-4 text-white/60`}
             >
               <li>
                 <Link href="/quiz">Take the quiz</Link>
@@ -260,10 +262,10 @@ const Footer = ({ variant = "default" }: FooterProps) => {
                   <Link href="/about-us">About Us</Link>
                 </li>
                 <li>
-                  <Link href="/features">Features</Link>
+                  <Link href={accountHref}>Account</Link>
                 </li>
                 <li>
-                  <Link href="/community">Community</Link>
+                  <Link href="/terms-and-conditions">Terms & Conditions</Link>
                 </li>
               </ul>
             </div>
