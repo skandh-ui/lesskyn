@@ -107,7 +107,7 @@ const DermatPage = () => {
     hasNextPage: false,
     hasPrevPage: false,
   });
-  const itemsPerPage = 1;
+  const itemsPerPage = 9;
 
   // Fetch dermatologists from API
   useEffect(() => {
@@ -252,10 +252,7 @@ const DermatPage = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-10">
                 {currentDoctors.map((doctor) => (
                   <div key={doctor.id} className="flex justify-center">
-                    <div
-                      onClick={() => router.push(`/dermat/${doctor.id}`)}
-                      className="cursor-pointer"
-                    >
+                    <div className="cursor-pointer">
                       <DermatCard
                         name={doctor.name}
                         qualifications={doctor.degree || "Dermatologist"}
@@ -272,7 +269,11 @@ const DermatPage = () => {
                         price={`₹${doctor.price || 0}`}
                         duration={`${doctor.durations?.[0] || 30} mins`}
                         avatar={doctor.avatar}
+                        socials={doctor.socials}
                         size="compact"
+                        onButtonClick={() =>
+                          router.push(`/dermat/${doctor.id}`)
+                        }
                       />
                     </div>
                   </div>

@@ -1,9 +1,8 @@
-"use client"; // Needed for useRouter and useState
+"use client"; // Needed for useState
 
 import { Instagram, Twitter, Facebook } from "lucide-react";
 import pp from "@/public/assets/avatar.svg";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
 type SocialLinks = {
   instagram?: string;
@@ -23,6 +22,8 @@ type InfluencerCardProps = {
   date?: string | Date;
   size?: "normal" | "compact";
   bookingId?: string;
+  hideButton?: boolean;
+  onButtonClick?: () => void;
 };
 
 const DEFAULT_AVATAR = pp;
@@ -38,9 +39,9 @@ const InfluencerCard = ({
   date,
   size = "normal",
   bookingId,
+  hideButton = false,
+  onButtonClick,
 }: InfluencerCardProps) => {
-  const router = useRouter();
-
   // Helper logic for Booked Variant
   const isBooked = variant === "booked";
   const targetDate = date ? new Date(date) : new Date();
@@ -106,14 +107,72 @@ const InfluencerCard = ({
                 isCompact ? "gap-3 mt-1" : "gap-4 mt-2"
               }`}
             >
-              <Twitter
-                className={`${isCompact ? "w-5 h-5" : "w-6 h-6"} fill-black`}
-                strokeWidth={1}
-              />
-              <Facebook
-                className={`${isCompact ? "w-5 h-5" : "w-6 h-6"} fill-black`}
-                strokeWidth={1}
-              />
+              {socials?.instagram && (
+                <a
+                  href={socials.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(
+                      socials.instagram,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }}
+                >
+                  <Instagram
+                    className={`${isCompact ? "w-5 h-5" : "w-6 h-6"} text-black`}
+                    strokeWidth={2}
+                  />
+                </a>
+              )}
+              {socials?.twitter && (
+                <a
+                  href={socials.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(
+                      socials.twitter,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }}
+                >
+                  <Twitter
+                    className={`${isCompact ? "w-5 h-5" : "w-6 h-6"} fill-black`}
+                    strokeWidth={1}
+                  />
+                </a>
+              )}
+              {socials?.facebook && (
+                <a
+                  href={socials.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:opacity-70 transition-opacity cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    window.open(
+                      socials.facebook,
+                      "_blank",
+                      "noopener,noreferrer",
+                    );
+                  }}
+                >
+                  <Facebook
+                    className={`${isCompact ? "w-5 h-5" : "w-6 h-6"} fill-black`}
+                    strokeWidth={1}
+                  />
+                </a>
+              )}
             </div>
           </div>
         </div>
@@ -129,10 +188,15 @@ const InfluencerCard = ({
           </p>
         </div>
 
-        {/* CTA Button - Only show if NOT booked */}
-        {!isBooked && (
+        {/* CTA Button - Only show if NOT booked and not hidden */}
+        {!isBooked && !hideButton && (
           <button
-            onClick={() => router.push("/")}
+            onClick={(e) => {
+              if (onButtonClick) {
+                e.stopPropagation();
+                onButtonClick();
+              }
+            }}
             className={`w-full ${buttonHeight} flex items-center justify-center rounded-[20px] bg-[#FCFCA2] border border-black/10 ${buttonTextSize} font-bold text-black transition-transform active:scale-[0.98] cursor-pointer hover:bg-[#fcfc90]`}
           >
             Talk Now

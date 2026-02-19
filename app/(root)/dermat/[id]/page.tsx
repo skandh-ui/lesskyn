@@ -38,7 +38,6 @@ const Page = ({ params }: PageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<"form" | "slots">("form");
-  const [bookingData, setBookingData] = useState<BookingFormData | null>(null);
   const [bookingId, setBookingId] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [slotRefreshTrigger, setSlotRefreshTrigger] = useState(0);
@@ -268,6 +267,7 @@ const Page = ({ params }: PageProps) => {
                   avatar={expert.avatar}
                   socials={expert.socials}
                   size="compact"
+                  hideButton={true}
                 />
               </div>
 

@@ -2,7 +2,6 @@
 
 import { Instagram, Twitter, Facebook } from "lucide-react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import pp from "@/public/assets/avatar.svg";
 import sthethoscope_icon from "@/public/assets/sthethoscope_icon.svg";
 
@@ -26,6 +25,8 @@ interface DermatCardProps {
   date?: string | Date;
   size?: "normal" | "compact";
   bookingId?: string;
+  hideButton?: boolean;
+  onButtonClick?: () => void;
 }
 
 const DEFAULT_AVATAR = pp;
@@ -43,8 +44,9 @@ const DermatCard = ({
   date,
   size = "normal",
   bookingId,
+  hideButton = false,
+  onButtonClick,
 }: DermatCardProps) => {
-  const router = useRouter();
   // Helper logic for Booked Variant
   const isBooked = variant === "booked";
   const targetDate = date ? new Date(date) : new Date();
@@ -128,24 +130,71 @@ const DermatCard = ({
             isCompact ? "gap-3 mb-4" : "gap-4 mb-6"
           }`}
         >
-          <Instagram
-            className={`${socialIconSize} text-black`}
-            strokeWidth={2}
-          />
-          <Twitter
-            className={`${socialIconSize} fill-black text-black`}
-            strokeWidth={0}
-          />
-          <Facebook
-            className={`${socialIconSize} fill-black text-black`}
-            strokeWidth={0}
-          />
+          {socials?.instagram && (
+            <a
+              href={socials.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(socials.instagram, "_blank", "noopener,noreferrer");
+              }}
+            >
+              <Instagram
+                className={`${socialIconSize} text-black`}
+                strokeWidth={2}
+              />
+            </a>
+          )}
+          {socials?.twitter && (
+            <a
+              href={socials.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(socials.twitter, "_blank", "noopener,noreferrer");
+              }}
+            >
+              <Twitter
+                className={`${socialIconSize} fill-black text-black`}
+                strokeWidth={0}
+              />
+            </a>
+          )}
+          {socials?.facebook && (
+            <a
+              href={socials.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:opacity-70 transition-opacity cursor-pointer"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                window.open(socials.facebook, "_blank", "noopener,noreferrer");
+              }}
+            >
+              <Facebook
+                className={`${socialIconSize} fill-black text-black`}
+                strokeWidth={0}
+              />
+            </a>
+          )}
         </div>
 
-        {/* Book Button - Only show if NOT booked */}
-        {!isBooked && (
+        {/* Book Button - Only show if NOT booked and not hidden */}
+        {!isBooked && !hideButton && (
           <button
-            onClick={() => router.push("/")}
+            onClick={(e) => {
+              if (onButtonClick) {
+                e.stopPropagation();
+                onButtonClick();
+              }
+            }}
             className={`w-[80%] ${buttonHeight} ${
               isCompact ? "mb-3" : "mb-4"
             } flex items-center justify-center rounded-2xl bg-[#FFFFA2] border border-black/10 ${buttonTextSize} font-bold text-black shadow-sm transition-transform active:scale-[0.98] hover:brightness-105 cursor-pointer`}

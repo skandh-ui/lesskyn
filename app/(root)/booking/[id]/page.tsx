@@ -36,7 +36,8 @@ const Page = ({ params }: PageProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [currentStep, setCurrentStep] = useState<"form" | "slots">("form");
-  const [bookingData, setBookingData] = useState<BookingFormData | null>(null);
+  const [bookingId, setBookingId] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [slotRefreshTrigger, setSlotRefreshTrigger] = useState(0);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
@@ -77,7 +78,7 @@ const Page = ({ params }: PageProps) => {
     fetchExpert();
   }, [expertId]);
 
-  const handleFormSubmit = (data: BookingFormData) => {
+  const handleFormSubmit = async (formData: BookingFormData) => {
     // Check if user is logged in
     if (status === "unauthenticated" || !session) {
       setToastMessage("Please sign in to continue with booking");
@@ -91,17 +92,109 @@ const Page = ({ params }: PageProps) => {
       return;
     }
 
-    console.log("Form submitted:", data);
-    setBookingData(data);
-    setCurrentStep("slots");
+    try {
+      setIsProcessing(true);
+
+      // Call initiateBooking API
+      const response = await fetch("/api/bookings/initiate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          expertId,
+          duration: expert?.durations[0] || 30,
+          formData,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to create booking");
+      }
+
+      const data = await response.json();
+      setBookingId(data.bookingId);
+      setCurrentStep("slots");
+      console.log("Booking initiated:", data);
+    } catch (error) {
+      console.error("Error initiating booking:", error);
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to create booking. Please try again.";
+
+      // Show toast for errors instead of alert
+      setToastMessage(errorMessage);
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleSlotSelect = async (date: string, slot: string) => {
-    console.log("Slot selected:", { date, slot, bookingData });
-    // TODO: Implement payment initiation for influencers
-    alert(
-      `Selected: ${date} at ${slot}\n\nPayment integration pending for influencers.`,
-    );
+    if (!bookingId) {
+      alert("Booking ID not found. Please try again.");
+      return;
+    }
+
+    try {
+      setIsProcessing(true);
+      console.log("Slot selected:", { date, slot, bookingId });
+
+      // Call initiatePayment API
+      const response = await fetch("/api/bookings/payment/initiate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          bookingId,
+          date,
+          slot,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to initiate payment");
+      }
+
+      const data = await response.json();
+      console.log("Payment initiated:", data);
+
+      // Redirect to payment URL
+      if (data.paymentUrl) {
+        window.location.href = data.paymentUrl;
+      } else {
+        throw new Error("Payment URL not received");
+      }
+    } catch (error) {
+      console.error("Error initiating payment:", error);
+
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to initiate payment. Please try again.";
+
+      // Check if it's a slot conflict error
+      if (
+        errorMessage.includes("just booked") ||
+        errorMessage.includes("no longer available")
+      ) {
+        alert(
+          errorMessage +
+            "\n\nThe available slots will be refreshed. Please select a different time.",
+        );
+        // Refresh the slots to show updated availability
+        setSlotRefreshTrigger((prev) => prev + 1);
+      } else {
+        alert(errorMessage);
+      }
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleBackToForm = () => {
@@ -165,6 +258,7 @@ const Page = ({ params }: PageProps) => {
                   price={`₹${expert.price}`}
                   duration={`${expert.durations?.[0] || 30} mins`}
                   size="compact"
+                  hideButton={true}
                 />
               </div>
 
@@ -230,21 +324,41 @@ const Page = ({ params }: PageProps) => {
           {/* Right Side - Form */}
           <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg border border-gray-100">
             {currentStep === "form" && (
-              <BookingForm
-                onSubmit={handleFormSubmit}
-                expertType="influencer"
-              />
+              <div className="relative">
+                {isProcessing && (
+                  <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-10 rounded-2xl">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B34B87] mx-auto mb-4"></div>
+                      <p className="text-gray-600">Creating booking...</p>
+                    </div>
+                  </div>
+                )}
+                <BookingForm
+                  onSubmit={handleFormSubmit}
+                  expertType="influencer"
+                />
+              </div>
             )}
 
             {currentStep === "slots" && expert && (
-              <SlotSelector
-                expertId={expertId}
-                duration={expert.durations[0] || 30}
-                expertType="influencer"
-                onSlotSelect={handleSlotSelect}
-                onBack={handleBackToForm}
-                refreshTrigger={slotRefreshTrigger}
-              />
+              <div className="relative">
+                {isProcessing && (
+                  <div className="absolute inset-0 bg-white/80 flex items-center justify-center z-10 rounded-2xl">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#B34B87] mx-auto mb-4"></div>
+                      <p className="text-gray-600">Processing payment...</p>
+                    </div>
+                  </div>
+                )}
+                <SlotSelector
+                  expertId={expertId}
+                  duration={expert.durations[0] || 30}
+                  expertType="influencer"
+                  onSlotSelect={handleSlotSelect}
+                  onBack={handleBackToForm}
+                  refreshTrigger={slotRefreshTrigger}
+                />
+              </div>
             )}
           </div>
         </div>

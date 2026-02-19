@@ -437,11 +437,7 @@ const Page = () => {
             <div className="flex flex-cols justify-center">
               <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-x-6 gap-y-10 py-[10px]">
                 {currentInfluencers.map((inf) => (
-                  <div
-                    key={inf.id}
-                    onClick={() => router.push(`/booking/${inf.id}`)}
-                    className="cursor-pointer"
-                  >
+                  <div key={inf.id} className="cursor-pointer">
                     <InfluencerCard
                       name={inf.name}
                       subtitle={inf.bio || "Skincare Expert"}
@@ -450,6 +446,7 @@ const Page = () => {
                       price={`₹${inf.price || 0}`}
                       duration={`${inf.durations?.[0] || 30} mins`}
                       size="compact"
+                      onButtonClick={() => router.push(`/booking/${inf.id}`)}
                     />
                   </div>
                 ))}
