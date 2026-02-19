@@ -5,33 +5,31 @@ const BULKPE_API_KEY = process.env.BULKPE_API_KEY!;
 
 export async function createBulkpePayment(payload: {
   bookingId: string;
-  amount: number; // 👈 Make it explicit - amount in paise
+  amount: number;
   name: string;
   email: string;
   phone: string;
 }) {
   const { bookingId, amount, name, email, phone } = payload;
 
+  const requestBody = {
+    reference_id: bookingId,
+    amount: amount,
+    name,
+    phone,
+    email,
+    success_url: `${process.env.FRONTEND_URL}/booking/success?bookingId=${bookingId}`,
+    failure_url: `${process.env.FRONTEND_URL}/booking/failed`,
+  };
+
   try {
-    const response = await axios.post(
-      BULKPE_API_URL,
-      {
-        reference_id: bookingId,
-        amount: amount, // 👈 No multiplication - already in paise
-        name,
-        phone,
-        email,
-        success_url: `${process.env.FRONTEND_URL}/booking/success?bookingId=${bookingId}`,
-        failure_url: `${process.env.FRONTEND_URL}/booking/failed`,
+    const response = await axios.post(BULKPE_API_URL, requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${BULKPE_API_KEY}`,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${BULKPE_API_KEY}`,
-        },
-        timeout: 10000,
-      },
-    );
+      timeout: 10000,
+    });
 
     // Check if API returned success status
     if (!response.data?.status) {

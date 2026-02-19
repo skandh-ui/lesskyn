@@ -46,6 +46,11 @@ export interface IBooking {
     mimeType?: string;
   }[];
 
+  // Patient skin details (from booking form)
+  skinType?: string;
+  concerns?: string[];
+  description?: string;
+
   // Cancellation / Refund
   cancelledBy?: "user" | "admin";
   cancelledAt?: Date;
@@ -139,6 +144,11 @@ const bookingSchema = new Schema<IBooking>(
         mimeType: String,
       },
     ],
+
+    // Patient skin details (from booking form)
+    skinType: String,
+    concerns: [String],
+    description: String,
 
     cancelledBy: {
       type: String,

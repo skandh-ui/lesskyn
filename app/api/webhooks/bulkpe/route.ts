@@ -58,24 +58,33 @@ export async function POST(req: Request) {
         try {
           const populatedBooking = await Booking.findById(booking._id)
             .populate("expert", "name email")
-            .populate("user", "email skinDetails")
+            .populate("user", "email")
             .lean();
 
           if (populatedBooking) {
-            // Build description with skin details
+            // Build description with skin details from booking (not user)
             let description = `Skin consultation session\nDuration: ${booking.duration} minutes\nAmount: ₹${booking.price}`;
 
-            if (populatedBooking.user.skinDetails) {
-              const { skinType, commitment, preference, concerns } =
-                populatedBooking.user.skinDetails;
-              description += `\n\n--- Patient Skin Details ---`;
-              if (skinType) description += `\nSkin Type: ${skinType}`;
-              if (commitment)
-                description += `\nCommitment Level: ${commitment}`;
-              if (preference) description += `\nPreference: ${preference}`;
-              if (concerns && concerns.length > 0) {
-                description += `\nConcerns: ${concerns.join(", ")}`;
-              }
+            // Get skin details from the booking itself
+            description += `\n\n--- Patient Skin Details ---`;
+
+            if (booking.skinType) {
+              description += `\nSkin Type: ${booking.skinType}`;
+            }
+
+            if (booking.concerns && booking.concerns.length > 0) {
+              description += `\nConcerns: ${booking.concerns.join(", ")}`;
+            }
+
+            if (booking.description) {
+              description += `\nAdditional Details: ${booking.description}`;
+            }
+
+            if (booking.attachments && booking.attachments.length > 0) {
+              description += `\n\nAttachments: ${booking.attachments.length} file(s)`;
+              booking.attachments.forEach((att, index) => {
+                description += `\n${index + 1}. ${att.title || "Attachment"}: ${att.url}`;
+              });
             }
 
             const { meetLink } = await createGoogleMeetEvent({

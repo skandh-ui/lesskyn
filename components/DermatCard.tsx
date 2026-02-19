@@ -80,7 +80,7 @@ const DermatCard = ({
     >
       {/* Content Section */}
       <div
-        className={`relative z-20 flex flex-col items-center ${padding} text-center`}
+        className={`relative z-20 flex flex-col flex-1 items-center ${padding} text-center`}
       >
         {/* Avatar */}
         <div
@@ -195,7 +195,7 @@ const DermatCard = ({
                 onButtonClick();
               }
             }}
-            className={`w-[80%] ${buttonHeight} ${
+            className={`w-[80%] ${buttonHeight} mt-auto ${
               isCompact ? "mb-3" : "mb-4"
             } flex items-center justify-center rounded-2xl bg-[#FFFFA2] border border-black/10 ${buttonTextSize} font-bold text-black shadow-sm transition-transform active:scale-[0.98] hover:brightness-105 cursor-pointer`}
           >

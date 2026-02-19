@@ -72,7 +72,7 @@ const InfluencerCard = ({
     <div
       className={`relative flex flex-col ${cardWidth} ${cardHeight} overflow-hidden rounded-[32px] border-[8px] border-[#E5E7EB] bg-white shadow-lg`}
     >
-      <div className={`${padding} relative z-20`}>
+      <div className={`${padding} relative z-20 flex flex-col flex-1`}>
         {/* Top Section: Avatar and Info */}
         <div
           className={`flex items-center ${
@@ -94,13 +94,20 @@ const InfluencerCard = ({
             <h3 className={`${nameSize} font-bold tracking-tight text-black`}>
               {name}
             </h3>
-            <p
-              className={`${
-                isCompact ? "text-xs" : "text-sm"
-              } font-medium text-gray-400`}
-            >
-              instagram.com/orlando
-            </p>
+            {socials?.instagram && (
+              <p
+                className={`${
+                  isCompact ? "text-xs" : "text-sm"
+                } font-medium text-gray-400`}
+              >
+                {(() => {
+                  const url = socials.instagram;
+                  // Extract username from Instagram URL
+                  const match = url.match(/instagram\.com\/([^/?]+)/);
+                  return match ? `instagram.com/${match[1]}` : url;
+                })()}
+              </p>
+            )}
             {/* Social icons */}
             <div
               className={`flex items-center ${
@@ -197,7 +204,7 @@ const InfluencerCard = ({
                 onButtonClick();
               }
             }}
-            className={`w-full ${buttonHeight} flex items-center justify-center rounded-[20px] bg-[#FCFCA2] border border-black/10 ${buttonTextSize} font-bold text-black transition-transform active:scale-[0.98] cursor-pointer hover:bg-[#fcfc90]`}
+            className={`w-full ${buttonHeight} mt-auto flex items-center justify-center rounded-[20px] bg-[#FCFCA2] border border-black/10 ${buttonTextSize} font-bold text-black transition-transform active:scale-[0.98] cursor-pointer hover:bg-[#fcfc90]`}
           >
             Talk Now
           </button>
