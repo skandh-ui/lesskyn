@@ -2,6 +2,7 @@
 
 import { Instagram, Twitter, Facebook } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import pp from "@/public/assets/avatar.svg";
 import sthethoscope_icon from "@/public/assets/sthethoscope_icon.svg";
 
@@ -20,6 +21,7 @@ interface DermatCardProps {
   socials?: SocialLinks;
   price?: string;
   duration?: string;
+  expertId?: string;
   // NEW PROPS
   variant?: "normal" | "booked";
   date?: string | Date;
@@ -40,6 +42,7 @@ const DermatCard = ({
   socials = { instagram: "#", twitter: "#", facebook: "#" },
   price = "₹100",
   duration = "15 mins",
+  expertId,
   variant = "normal",
   date,
   size = "normal",
@@ -47,6 +50,7 @@ const DermatCard = ({
   hideButton = false,
   onButtonClick,
 }: DermatCardProps) => {
+  const router = useRouter();
   // Helper logic for Booked Variant
   const isBooked = variant === "booked";
   const targetDate = date ? new Date(date) : new Date();
@@ -190,9 +194,11 @@ const DermatCard = ({
         {!isBooked && !hideButton && (
           <button
             onClick={(e) => {
+              e.stopPropagation();
               if (onButtonClick) {
-                e.stopPropagation();
                 onButtonClick();
+              } else if (expertId) {
+                router.push(`/dermat/${expertId}`);
               }
             }}
             className={`w-[80%] ${buttonHeight} mt-auto ${

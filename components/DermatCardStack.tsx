@@ -7,6 +7,7 @@ import DermatCard from "@/components/DermatCard";
 
 interface DoctorData {
   id: number;
+  expertId: string;
   name: string;
   qualifications: string;
   experience: string;
@@ -14,6 +15,11 @@ interface DoctorData {
   price: string;
   duration: string;
   avatar?: string;
+  socials?: {
+    instagram?: string;
+    twitter?: string;
+    facebook?: string;
+  };
 }
 
 interface DermatCardStackProps {
@@ -120,6 +126,8 @@ const DermatCardStack: React.FC<DermatCardStackProps> = ({
             price={doctor.price}
             duration={doctor.duration}
             avatar={doctor.avatar}
+            socials={doctor.socials}
+            expertId={doctor.expertId}
             size="compact"
             className="md:scale-100 scale-75 origin-top"
           />

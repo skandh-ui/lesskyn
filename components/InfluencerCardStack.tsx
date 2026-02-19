@@ -14,6 +14,7 @@ interface SocialLinks {
 
 interface InfluencerData {
   id: number;
+  expertId: string;
   name: string;
   subtitle: string;
   price: string;
@@ -121,6 +122,7 @@ const InfluencerCardStack: React.FC<InfluencerCardStackProps> = ({
             duration={influencer.duration}
             avatar={influencer.avatar}
             socials={influencer.socials}
+            expertId={influencer.expertId}
             size="compact"
             className="md:scale-100 scale-75 origin-top"
           />

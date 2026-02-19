@@ -67,57 +67,97 @@ const QUESTIONS_DATA = [
 const DERMAT_DATA = [
   {
     id: 1,
-    name: "Dr. Orlando Diggs",
-    qualifications: "MD Dermatology",
-    experience: "10 Years Experience",
-    details: "Specialist in Acne & Scars",
-    price: "₹100",
-    duration: "15 mins",
+    expertId: "6996ff958768e6c702b24f55",
+    name: "Dr. Neha Mariam Joseph",
+    qualifications: "MBBS, MD Dermatology",
+    experience: "2 Years Experience",
+    details: "Aesthetic & Clinical Dermatology",
+    price: "₹1000",
+    duration: "30 mins",
+    avatar:
+      "https://res.cloudinary.com/dcpb1ewuk/image/upload/v1771503543/eictgvhd5lnenbdgqepy.jpg",
+    socials: {
+      instagram:
+        "https://www.instagram.com/thenehajoseph?igsh=MWdma3l1b2plM29zYw%3D%3D",
+    },
   },
   {
     id: 2,
-    name: "Dr. Sarah Chen",
-    qualifications: "MD, FAAD",
-    experience: "8 Years Experience",
-    details: "Pediatric Dermatology",
-    price: "₹150",
-    duration: "20 mins",
+    expertId: "699704258768e6c702b24ff1",
+    name: "Dr Rehan Rafiuddin Gulam",
+    qualifications: "MBBS",
+    experience: "1 Year Experience",
+    details: "General Dermatology",
+    price: "₹375",
+    duration: "15 mins",
+    avatar:
+      "https://res.cloudinary.com/dcpb1ewuk/image/upload/v1771504392/yrefkoxbcsluj8bgpl0r.jpg",
+    socials: {
+      instagram: "https://www.instagram.com/skinbyrehan",
+    },
   },
   {
     id: 3,
-    name: "Dr. Ananya Gupta",
-    qualifications: "MBBS, DDVL",
-    experience: "12 Years Experience",
-    details: "Anti-aging & Aesthetics",
-    price: "₹200",
+    expertId: "69970c52d9b2c2364d464880",
+    name: "Dr. Shreya Deoghare",
+    qualifications: "MBBS, MD Dermatology, iFAAD",
+    experience: "3 Years Experience",
+    details: "Dermatology",
+    price: "₹750",
     duration: "15 mins",
+    avatar:
+      "https://res.cloudinary.com/dcpb1ewuk/image/upload/v1771506646/tv5taqdqjyejohhwvctf.jpg",
+    socials: {
+      instagram: "https://www.instagram.com/dr.shreyadeoghare_derm",
+    },
   },
 ];
 
 const INFLUENCER_DATA = [
   {
     id: 1,
-    name: "Sophie Moore",
+    expertId: "69971033d9b2c2364d4648bf",
+    name: "Riya Debbarma",
     subtitle:
-      "Let's chat about overcoming cystic acne and finding the right routine.",
-    price: "₹50",
+      "I used to have open pores and white heads but now it's better after regular use of toner and serum.",
+    price: "₹100",
     duration: "15 mins",
+    avatar:
+      "https://res.cloudinary.com/dcpb1ewuk/image/upload/v1771507757/rkeeqlq6h8wuduib4hf4.jpg",
+    socials: {
+      instagram:
+        "https://www.instagram.com/rare_ririe?igsh=ejV5amRoYWk1MGJu&utm_source=qr",
+    },
   },
   {
     id: 2,
-    name: "Alex Rivera",
+    expertId: "699717105218ecef704bf978",
+    name: "Suhasi sahani",
     subtitle:
-      "Skincare junkie sharing tips on hydration and glass skin secrets.",
-    price: "₹75",
-    duration: "20 mins",
+      "I have oily skin so my first concern is active pimples and acne scars. Book a call to understand current skincare trends.",
+    price: "₹300",
+    duration: "15 mins",
+    avatar:
+      "https://res.cloudinary.com/dcpb1ewuk/image/upload/v1771509427/vvuhze4avf7fbish1kmb.png",
+    socials: {
+      instagram:
+        "https://www.instagram.com/gloss__theory?igsh=NmsyOGo2Mnp5Zmw2",
+    },
   },
   {
     id: 3,
-    name: "Jordan Lee",
+    expertId: "699717ec5218ecef704bf981",
+    name: "Aakriti Maurya",
     subtitle:
-      "Real talk on sensitive skin, product fails, and budget-friendly finds.",
-    price: "₹60",
+      "I have normal skin and create easy skincare and makeup routines that enhance natural skin, focusing on everyday looks and skin-friendly products.",
+    price: "₹500",
     duration: "15 mins",
+    avatar:
+      "https://res.cloudinary.com/dcpb1ewuk/image/upload/v1771509729/w4akkclbhwylajmmpgek.jpg",
+    socials: {
+      instagram:
+        "https://www.instagram.com/_thedocdose_?igsh=MTA3b284MzY3NnY3cw==",
+    },
   },
 ];
 

@@ -1,6 +1,7 @@
 "use client"; // Needed for useState
 
 import { Instagram, Twitter, Facebook } from "lucide-react";
+import { useRouter } from "next/navigation";
 import pp from "@/public/assets/avatar.svg";
 import Image from "next/image";
 
@@ -17,6 +18,7 @@ type InfluencerCardProps = {
   socials?: SocialLinks;
   price?: string;
   duration?: string;
+  expertId?: string;
   // NEW PROPS
   variant?: "normal" | "booked";
   date?: string | Date;
@@ -35,6 +37,7 @@ const InfluencerCard = ({
   socials = { instagram: "#", twitter: "#", facebook: "#" },
   price = "₹100",
   duration = "15 mins",
+  expertId,
   variant = "normal",
   date,
   size = "normal",
@@ -42,6 +45,7 @@ const InfluencerCard = ({
   hideButton = false,
   onButtonClick,
 }: InfluencerCardProps) => {
+  const router = useRouter();
   // Helper logic for Booked Variant
   const isBooked = variant === "booked";
   const targetDate = date ? new Date(date) : new Date();
@@ -199,9 +203,11 @@ const InfluencerCard = ({
         {!isBooked && !hideButton && (
           <button
             onClick={(e) => {
+              e.stopPropagation();
               if (onButtonClick) {
-                e.stopPropagation();
                 onButtonClick();
+              } else if (expertId) {
+                router.push(`/booking/${expertId}`);
               }
             }}
             className={`w-full ${buttonHeight} mt-auto flex items-center justify-center rounded-[20px] bg-[#FCFCA2] border border-black/10 ${buttonTextSize} font-bold text-black transition-transform active:scale-[0.98] cursor-pointer hover:bg-[#fcfc90]`}
