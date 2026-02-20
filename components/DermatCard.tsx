@@ -124,7 +124,7 @@ const DermatCard = ({
           } ${qualificationSize} font-medium leading-relaxed text-gray-400`}
         >
           <p>{qualifications}</p>
-          <p>{experience}</p>
+          {/* <p>{experience}</p> */}
           <p>{details}</p>
         </div>
 
