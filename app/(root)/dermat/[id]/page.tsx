@@ -43,6 +43,7 @@ const Page = ({ params }: PageProps) => {
   const [slotRefreshTrigger, setSlotRefreshTrigger] = useState(0);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [bookingData, setBookingData] = useState<BookingFormData | null>(null);
 
   // Resolve params and set expertId
   useEffect(() => {

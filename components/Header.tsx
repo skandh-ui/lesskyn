@@ -228,17 +228,28 @@ const Header = () => {
                   Skin Besties
                 </Link>
                 {session?.user?.id ? (
-                  <Link
-                    href="/dashboard"
-                    onClick={() => setOpen(false)}
-                    className="flex items-center gap-2"
-                  >
-                    <UserCircle2
-                      className="w-7 h-7 text-black"
-                      strokeWidth={1.5}
-                    />
-                    <span>Profile</span>
-                  </Link>
+                  <>
+                    <Link
+                      href="/dashboard"
+                      onClick={() => setOpen(false)}
+                      className="flex items-center gap-2"
+                    >
+                      <UserCircle2
+                        className="w-7 h-7 text-black"
+                        strokeWidth={1.5}
+                      />
+                      <span>Dashboard</span>
+                    </Link>
+                    <button
+                      onClick={async () => {
+                        setOpen(false);
+                        await logout();
+                      }}
+                      className="w-full px-4 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition-colors text-left"
+                    >
+                      Logout
+                    </button>
+                  </>
                 ) : (
                   <button
                     onClick={() => {
