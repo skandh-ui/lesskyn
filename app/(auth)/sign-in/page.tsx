@@ -269,7 +269,7 @@ const SignInPage = () => {
                   });
 
                   if (result.success) {
-                    router.push(redirectUrl);
+                    window.location.href = redirectUrl;
                   } else {
                     setError(result.error || "Failed to sign in");
                   }

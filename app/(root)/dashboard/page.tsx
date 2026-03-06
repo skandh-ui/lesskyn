@@ -42,10 +42,13 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (status === "loading") return;
     if (session?.user) {
       fetchUserData();
+    } else {
+      setLoading(false);
     }
-  }, [session]);
+  }, [session, status]);
 
   const fetchUserData = async () => {
     try {

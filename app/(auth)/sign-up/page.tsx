@@ -296,7 +296,7 @@ const SignInPage = () => {
                   const result = await signUp({ userName, email, password });
 
                   if (result.success) {
-                    router.push(redirectUrl);
+                    window.location.href = redirectUrl;
                   } else {
                     setError(result.error || "Failed to sign up");
                   }
