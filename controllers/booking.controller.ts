@@ -2,6 +2,7 @@ import mongoose, { isValidObjectId } from "mongoose";
 import { Booking, BookingStatus } from "@/models/booking.model";
 import { Expert } from "@/models/expert.model";
 import { createBulkpePayment } from "@/lib/createBulkPePayment";
+import { createPayuPayment } from "@/lib/createPayuPayment";
 
 interface ListBookingsInput {
   userId: string;
@@ -350,7 +351,7 @@ export async function initiatePayment(payload: {
     session.endSession();
 
     // ✅ Call payment OUTSIDE transaction (no try-catch wrapping it)
-    const { redirectUrl } = await createBulkpePayment({
+    const { redirectUrl } = await createPayuPayment({
       bookingId: booking._id.toString(),
       amount: booking.price,
       name: booking.payer.name,

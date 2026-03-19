@@ -1,5 +1,5 @@
 import mongoose, { Schema, model, models } from "mongoose";
-
+// Payment model to track all payment transactions related to bookings, integrated with BulkPe payment gateway
 export type PaymentStatus =
   | "created"     // Payment record created, awaiting payment
   | "pending"     // Payment initiated, waiting for confirmation

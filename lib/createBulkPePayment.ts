@@ -1,5 +1,5 @@
 import axios from "axios";
-
+// Service to create a payment link using BulkPe payment gateway for a booking. This will be called when user initiates payment for a booking, and it will return the redirect URL to the BulkPe payment page where user can complete the payment. The service also handles errors gracefully and ensures that all necessary information is sent to BulkPe for successful payment processing.
 const BULKPE_API_URL = "https://api.bulkpe.in/client/createPGCollection";
 const BULKPE_API_KEY = process.env.BULKPE_API_KEY!;
 
