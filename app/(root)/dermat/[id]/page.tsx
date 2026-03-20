@@ -146,7 +146,7 @@ const Page = ({ params }: PageProps) => {
     try {
       setIsProcessing(true);
       console.log("Slot selected:", { date, slot, bookingId });
-
+//      console.log("Initiating payment with:", { bookingId, date, slot });
       // Call initiatePayment API
       const response = await fetch("/api/bookings/payment/initiate", {
         method: "POST",
