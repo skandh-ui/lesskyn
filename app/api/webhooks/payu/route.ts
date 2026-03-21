@@ -3,6 +3,7 @@ import crypto from "crypto";
 import { createBookingFromPayment } from "@/controllers/booking.controller";
 import { createGoogleMeetEvent } from "@/lib/createGoogleMeetEvent";
 import { Booking } from "@/models/booking.model";
+import "@/models/expert.model";
 import { connectToDatabase } from "@/database/db";
 
 function verifyPayuHash(params: Record<string, string>): boolean {

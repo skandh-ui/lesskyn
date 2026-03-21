@@ -1,3 +1,7 @@
+/*
+!ROUTE IS NO LONGER IN USE-DEPRECATED
+ */
+
 import { NextResponse } from "next/server";
 import { createBookingFromPayment } from "@/controllers/booking.controller";
 import { createGoogleMeetEvent } from "@/lib/createGoogleMeetEvent";
