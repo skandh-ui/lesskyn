@@ -148,7 +148,10 @@ const SignInPage = () => {
       {/* ================= BOTTOM SECTION (Form Inputs) ================= */}
       <div className="w-full bg-white pb-20">
         <div className="w-full max-w-md mx-auto px-4 flex flex-col items-center">
-          <form className="w-full flex flex-col gap-6 text-left" onSubmit={(e) => e.preventDefault()}>
+          <form
+            className="w-full flex flex-col gap-6 text-left"
+            onSubmit={(e) => e.preventDefault()}
+          >
             {/* Email Input */}
             <div>
               <label

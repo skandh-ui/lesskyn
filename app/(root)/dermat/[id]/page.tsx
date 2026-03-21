@@ -168,11 +168,22 @@ const Page = ({ params }: PageProps) => {
       const data = await response.json();
       console.log("Payment initiated:", data);
 
-      // Redirect to payment URL
-      if (data.paymentUrl) {
-        window.location.href = data.paymentUrl;
+      // Submit form to PayU
+      if (data.payuUrl && data.payuParams) {
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = data.payuUrl;
+        Object.entries(data.payuParams).forEach(([key, value]) => {
+          const input = document.createElement("input");
+          input.type = "hidden";
+          input.name = key;
+          input.value = value as string;
+          form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
       } else {
-        throw new Error("Payment URL not received");
+        throw new Error("Payment data not received");
       }
     } catch (error) {
       console.error("Error initiating payment:", error);

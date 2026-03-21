@@ -1,7 +1,7 @@
 import mongoose, { isValidObjectId } from "mongoose";
 import { Booking, BookingStatus } from "@/models/booking.model";
 import { Expert } from "@/models/expert.model";
-import { createBulkpePayment } from "@/lib/createBulkPePayment";
+import { createPayuPayment } from "@/lib/createPayuPayment";
 
 interface ListBookingsInput {
   userId: string;
@@ -349,8 +349,8 @@ export async function initiatePayment(payload: {
     // ✅ End session immediately after commit
     session.endSession();
 
-    // ✅ Call payment OUTSIDE transaction (no try-catch wrapping it)
-    const { redirectUrl } = await createBulkpePayment({
+    // Call payment OUTSIDE transaction (no try-catch wrapping it)
+    const payuData = createPayuPayment({
       bookingId: booking._id.toString(),
       amount: booking.price,
       name: booking.payer.name,
@@ -361,7 +361,8 @@ export async function initiatePayment(payload: {
     return {
       bookingId: booking._id,
       amount: booking.price,
-      paymentUrl: redirectUrl,
+      payuUrl: payuData.payuUrl,
+      payuParams: payuData.params,
     };
   } catch (err: any) {
     // ✅ Only abort if transaction is still active
