@@ -31,8 +31,8 @@ export function createPayuPayment(payload: {
       firstname: name,
       email,
       phone,
-      surl: `${process.env.FRONTEND_URL}/booking/success?bookingId=${bookingId}`,
-      furl: `${process.env.FRONTEND_URL}/booking/failed`,
+      surl: `${process.env.FRONTEND_URL}/api/bookings/payment/redirect`,
+      furl: `${process.env.FRONTEND_URL}/api/bookings/payment/redirect`,
       hash,
     },
   };
